@@ -23,18 +23,17 @@ class Student < Person
 	end
 end
 
-class Teacher < Person
+class Instructor < Person
 	def teach
 		"Everything in Ruby is an Object."
 	end
 end
 
 
-Chris = Student.new("Chris")
-puts Chris.greeting
-Christina = Teacher.new("Christina")
-Christina.name = "Christina"
-puts Christina.greeting
-puts Christina.teach
-puts Chris.learn
-puts Chris.teach # Apparently Chris can't teach because he's a student.  This is pedagogically unsound, but logically corrrect.
+chris = Instructor.new("Chris")
+puts chris.greeting
+christina = Student.new("Christina")
+puts christina.greeting
+puts chris.teach
+puts christina.learn
+puts christina.teach # Apparently Christina can't teach because he's a student.  This is pedagogically unsound, but logically corrrect.
