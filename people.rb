@@ -8,7 +8,10 @@
 # Call the teach method on your instructor instance and call the learn method on your student. Next, call the teach method on your student instance. What happens? Why doesn't that work? Leave a comment in your program explaining why.
 
 class Person
-	attr_accessor :name
+	def initialize(name)
+		@name=name
+	end
+
 	def greeting
 		"Hi, my name is #{@name}"		
 	end
@@ -27,10 +30,9 @@ class Teacher < Person
 end
 
 
-Chris = Student.new
-Chris.name = "Chris"
+Chris = Student.new("Chris")
 puts Chris.greeting
-Christina = Teacher.new
+Christina = Teacher.new("Christina")
 Christina.name = "Christina"
 puts Christina.greeting
 puts Christina.teach
