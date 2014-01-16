@@ -36,4 +36,4 @@ christina = Student.new("Christina")
 puts christina.greeting
 puts chris.teach
 puts christina.learn
-puts christina.teach # Apparently Christina can't teach because he's a student.  This is pedagogically unsound, but logically corrrect.
+puts christina.teach # Apparently Christina can't teach because she's a student.  This is pedagogically unsound, but logically corrrect.
