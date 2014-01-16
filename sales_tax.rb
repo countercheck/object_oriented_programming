@@ -44,35 +44,109 @@
 # Sales Taxes: 6.70
 # Total: 74.68
 
+class Entry
+
+	def initialize(entry)
+		@split_entry=entry.split(" ")
+		@quanty = @split_entry[0]
+		@price = @split_entry[-1]
+		@item = @split_entry[1..-3].join(" ")
+		@exempt = SalesTax.new(@item,@price).exempt?
+		@imported = SalesTax.new(@item,@price).imported?
+	end
+
+	def print_entry
+		puts @split_entry.join(" ")
+	end
+
+	def get_tax
+		SalesTax.new(@item, price).calculate_tax
+	end
+
+end
+
+class SalesTax
+	def initialize(item, price)
+		@item=item
+		@price=price
+		@import_tax_rate=0.05
+		@sales_tax_rate=0.1
+		@exemptions = ["chocolate", "pill", "book"]
+	end
+
+	def exempt?
+		@exemptions.each do |ex|
+			if @item.include? ex
+				return true
+			end
+		end
+		return false
+	end
+
+	def imported?
+		@item.include? "imported"
+	end
+
+	def calculate_tax
+		tax = 0
+		tax += @sales_tax_rate unless @exempt
+		tax += @import_tax_rate if @imported
+		return tax
+	end
+
+end
+
+
 # class Entry
-# 	def initialize(string)
-# 		@string=string
+
+# 	def initialize(qty, type, price)
+# 		@qty=qty
+# 		@type=type
+# 		@price=price
 # 	end
 
 # 	def sales_tax
-# 		unless
+# 		if @type = "imported"
+# 			@sales_percentage = 0.05
+# 		elsif @
+# 			@sales_percentage = something
+# 		else
+# 			@sales_percentage = something	
+# 		end
+
+		
 # 	end
+
 # end
 
-def tax(array)
-	tax=0
-	exempt = false
-	tax += 0.05 if array.include? "imported"
-	exemptions = ["book", "chocolate", "pill"]
-	array.each do |thing|
-		 exemptions.each do |exemption|
-		 	exempt = true if thing.include? exemption
-		 end
-	end
-	tax += 0.1 unless exempt
-	return tax
-end
+# Entry.new(1, "import", 1249)
+# class SalesTax
+# 	def initialize(args)
+		
+# 	end
+	
+	
+# end
 
-entry1 = ("1 imported bottle of perfume at 27.99".split(" "))
-entry2 = ("1 bottle of perfume at 18.99".split(" "))
-entry3 = ("1 packet of headache pills at 9.75".split(" "))
-entry4 = ("1 box of imported chocolates at 11.25".split(" "))
-puts entry1[-1].to_f * tax(entry1)
-puts entry2[-1].to_f * tax(entry2)
-puts entry3[-1].to_f * tax(entry3)
-puts entry4[-1].to_f * tax(entry4)
+# def tax(array)
+# 	tax=0
+# 	exempt = false
+# 	tax += 0.05 if array.include? "imported"
+# 	exemptions = ["book", "chocolate", "pill"]
+# 	array.each do |thing|
+# 		 exemptions.each do |exemption|
+# 		 	exempt = true if thing.include? exemption
+# 		 end
+# 	end
+# 	tax += 0.1 unless exempt
+# 	return tax
+# end
+
+# entry1 = ("1 imported bottle of perfume at 27.99".split(" "))
+# entry2 = ("1 bottle of perfume at 18.99".split(" "))
+# entry3 = ("1 packet of headache pills at 9.75".split(" "))
+# entry4 = ("1 box of imported chocolates at 11.25".split(" "))
+# puts entry1[-1].to_f * tax(entry1)
+# puts entry2[-1].to_f * tax(entry2)
+# puts entry3[-1].to_f * tax(entry3)
+# puts entry4[-1].to_f * tax(entry4)
