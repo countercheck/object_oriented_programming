@@ -53,13 +53,27 @@ def execute_orders(position,orders, bounds)
 		end
 		print position
 		print "\n"
+		display_map(bounds, position)
 	end
 end
+
+def display_map(bounds, position)
+	(bounds[1].downto(0)).each do |y|
+		(0..bounds[0]).each do |x|
+			if position[0] == x && position[1] == y
+				print position[2]
+			else print "*"
+			end
+		end
+		print "\n"
+	end
+
+end
+
 
 bounds = [5, 5]
 position = [1, 2, "N"]
 orders = "LMLMLMLMM".split("")
-
 execute_orders(position, orders, bounds)
 #test1
 # directions = ["N","E","S","W"]
