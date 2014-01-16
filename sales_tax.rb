@@ -61,9 +61,7 @@ def tax(array)
 	exemptions = ["book", "chocolate", "pill"]
 	array.each do |thing|
 		 exemptions.each do |exemption|
-		 	if thing.include? exemption
-		 		exempt=true
-		 	end
+		 	exempt = true if thing.include? exemption
 		 end
 	end
 	tax += 0.1 unless exempt
